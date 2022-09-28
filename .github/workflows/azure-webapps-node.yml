@@ -3,7 +3,7 @@ name: Deploy Next App to Azure Storage
 on:
   push:
     branches:
-      - test
+      - main
 
 defaults:
   run:
