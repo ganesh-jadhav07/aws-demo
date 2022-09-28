@@ -1,6 +1,8 @@
 name: Deploy Next App to Azure Storage
 
 on:
+  repository_dispatch:
+    types: [wordpress]
   push:
     branches:
       - main
