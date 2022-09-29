@@ -35,5 +35,5 @@ jobs:
           source_dir: "./out"
           container_name: "bluepineapple-demo"
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
-          extra_args: "--destination-path production"
+          extra_args: "az storage blob upload-batch --destination-path production"
           sync: "true"
