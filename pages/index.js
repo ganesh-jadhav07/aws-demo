@@ -64,36 +64,3 @@ export default function Home() {
     </div>
   );
 }
-
-export async function getStaticProps() {
-  const res = await fetch(`http://20.197.10.81/?graphql`, {
-    method: "POST",
-    credentials: "same-origin",
-    headers: {
-      "content-type": "application/json",
-      Authorization: `Bearer ${process.env.TOKEN}`,
-    },
-    body: JSON.stringify({
-      query: `query GetPosts {
- posts(where: {status: PRIVATE}) {
-nodes {
-id
- title
- content
-}
-}
-}
-`,
-    }),
-  });
-
-  const json = await res.json();
-
-  console.log(json);
-
-  return {
-    props: {
-      data: json.data,
-    },
-  };
-}
