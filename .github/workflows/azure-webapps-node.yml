@@ -1,5 +1,5 @@
 # repository_dispatch:
- #   types: [wordpress] */
+#   types: [wordpress] */
 name: Deploy Next App to Azure Storage
 
 on:
@@ -33,7 +33,7 @@ jobs:
         uses: bacongobbler/azure-blob-storage-upload@main
         with:
           source_dir: "./out"
-          container_name: "$web"
+          container_name: "bluepineapple-demo"
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
           destination_dir: "production"
           sync: "true"
