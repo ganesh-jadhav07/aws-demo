@@ -1,8 +1,12 @@
-# repository_dispatch:
-#   types: [wordpress] */
+
 name: Deploy Next App to Azure Storage
 
-on: push
+on: 
+  push:
+    branches:
+      main
+  repository_dispatch:
+    types: [wordpress]
 
 defaults:
   run:
@@ -31,5 +35,5 @@ jobs:
         with:
           source_dir: "./out"
           container_name: "$web"
-          connection_string: ${{ secrets.AWSDEV }}
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
           sync: "true"
