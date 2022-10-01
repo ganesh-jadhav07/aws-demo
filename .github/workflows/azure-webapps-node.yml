@@ -1,0 +1,39 @@
+
+name: Deploy Next App to Azure Storage
+
+on: 
+  push:
+    branches:
+      test
+  repository_dispatch:
+    types: [wordpress]
+
+defaults:
+  run:
+    working-directory: ./
+env:
+  NODE_VERSION: "16" # set this to the node version to use
+  CI: false
+jobs:
+  DEV:
+    name: Development Environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: npm install & build
+        run: |
+          # Build and test the project, then
+          # deploy to Azure Web App.
+          npm install --force
+          npm run build
+      - name: "Deploy next app to Azure blob storage"
+        uses: LanceMcCarthy/Action-AzureBlobUpload@v2
+        with:
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
+          source_folder: "./out"
+          container_name: "$web"
+          destination_folder: "QA"
