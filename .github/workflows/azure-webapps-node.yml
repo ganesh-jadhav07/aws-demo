@@ -36,4 +36,5 @@ jobs:
           source_dir: "./out"
           container_name: "$web"
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
+          extra_args: "--destination-path new_blob"
           sync: "true"
