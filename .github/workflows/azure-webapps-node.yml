@@ -4,7 +4,7 @@ name: Deploy Next App to Azure Storage
 on: 
   push:
     branches:
-      main
+      test
   repository_dispatch:
     types: [wordpress]
 
@@ -36,4 +36,4 @@ jobs:
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
           source_folder: "./out"
           container_name: "$web"
-          destination_folder: "newblob"
+          destination_folder: "QA"
