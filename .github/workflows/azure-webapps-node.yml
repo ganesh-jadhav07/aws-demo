@@ -1,4 +1,4 @@
-name: Deploy Next App to Test Enviroment
+name: Deploy Next App to Development Environment
 
 on:
   push:
