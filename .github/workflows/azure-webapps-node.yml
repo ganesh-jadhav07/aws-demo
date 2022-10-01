@@ -31,7 +31,7 @@ jobs:
           npm install --force
           npm run build
       - name: "Deploy next app to Azure blob storage"
-        uses: bacongobbler/azure-blob-storage-upload@main
+        uses: LanceMcCarthy/Action-AzureBlobUpload@v2
         with:
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
           source_folder: "./out"
