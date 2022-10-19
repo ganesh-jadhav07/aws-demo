@@ -1,8 +1,9 @@
-name: Deploy Next App to Production
+name: Deploy Next App to Azure Blob Storage and CDN
 
 on:
   push:
-    branches: main
+    branches:
+      - test
   repository_dispatch:
     types: [wordpress]
 
@@ -10,11 +11,11 @@ defaults:
   run:
     working-directory: ./
 env:
-  NODE_VERSION: "16" # set this to the node version to use
+  NODE_VERSION: "16"
   CI: false
 jobs:
-  DEV:
-    name: Development Environment
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +30,9 @@ jobs:
           npm install --force
           npm run build
       - name: "Deploy next app to Azure blob storage"
-        uses: LanceMcCarthy/Action-AzureBlobUpload@v2
+        uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
-          source_folder: "./out"
+          source_dir: "./out"
           container_name: "$web"
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE }}
+          sync: "true"
